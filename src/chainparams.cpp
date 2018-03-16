@@ -54,11 +54,10 @@ static void convertSeed6(std::vector<CAddress>& vSeedsOut, const SeedSpec6* data
 
 static Checkpoints::MapCheckpoints mapCheckpoints =
     boost::assign::map_list_of
-    (0, uint256("0x000008968a12126c31fe23129f16500295de19a9d066f7e92fa1bf0d68977291"))
-    (2, uint256("00000064ed665bb1b5919cb2214017c4ee104293636277fa898bb785f472383b")); // Premine
+    (0, uint256("0x000008968a12126c31fe23129f16500295de19a9d066f7e92fa1bf0d68977291"));
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
-    1519515449, // * UNIX timestamp of last checkpoint block
+    1521196758, // * UNIX timestamp of last checkpoint block
     1,    // * total number of transactions between genesis and last checkpoint
                 //   (the tx=... number in the SetBestChain debug.log lines)
     100        // * estimated number of transactions per day after checkpoint
@@ -68,7 +67,7 @@ static Checkpoints::MapCheckpoints mapCheckpointsTestnet =
     boost::assign::map_list_of(0, uint256("0x001"));
 static const Checkpoints::CCheckpointData dataTestnet = {
     &mapCheckpointsTestnet,
-    1454124731,
+    1521196823,
     0,
     250};
 
@@ -76,7 +75,7 @@ static Checkpoints::MapCheckpoints mapCheckpointsRegtest =
     boost::assign::map_list_of(0, uint256("0x001"));
 static const Checkpoints::CCheckpointData dataRegtest = {
     &mapCheckpointsRegtest,
-    1454124731,
+    1521196823,
     0,
     100};
 
@@ -92,11 +91,11 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 4-byte int at any alignment.
          */
-        pchMessageStart[0] = 0xa1;
-        pchMessageStart[1] = 0xb3;
-        pchMessageStart[2] = 0x4c;
-        pchMessageStart[3] = 0x5e;
-        vAlertPubKey = ParseHex("042ea461817021fa1a8c9dd00a81718108827960936852f28f1531a6b27218ae70519a6009aaf5da1c493ea657585253a2fec70280aed695c0c217cf43f2134c1c");
+        pchMessageStart[0] = 0xb1;
+        pchMessageStart[1] = 0x2a;
+        pchMessageStart[2] = 0xa3;
+        pchMessageStart[3] = 0xe2;
+        vAlertPubKey = ParseHex("04afca88dee51eb2ecc29ee356592be1c69e7a60a12eb9965514ae631b5e1a3b394383979be354dbe325531db973d68a36041f07125b6caa27f534ff140ee40e8f");
         nDefaultPort = 24246;
         bnProofOfWorkLimit = ~uint256(0) >> 20; // FIX starting difficulty is 1 / 2^12
         nSubsidyHalvingInterval = 210000;
@@ -113,37 +112,35 @@ public:
         nModifierUpdateBlock = 510;
         nMaxMoneyOut = 21000000 * COIN;
 
-        const char* pszTimestamp = "The V.90 modem standard is announced and agreed upon";
+        const char* pszTimestamp = "Stephen Hawking, science's brightest star, dies aged 76";
         CMutableTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 486604799 << CScriptNum(4) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
         txNew.vout[0].nValue = 50 * COIN;
-        txNew.vout[0].scriptPubKey = CScript() << ParseHex("042ea461817021fa1a8c9dd00a81718108827960936852f28f1531a6b27218ae70519a6009aaf5da1c493ea657585253a2fec70280aed695c0c217cf43f2134c1c") << OP_CHECKSIG;
+        txNew.vout[0].scriptPubKey = CScript() << ParseHex("049a711e19c2df1524524a47c7822e1fb806cf2de5d9fd77897d445aebf6087a6c4edc6818c5e3630100858b6f928cc3008ddb8ece09582b226a08fdbe88ab05e3") << OP_CHECKSIG;
         genesis.vtx.push_back(txNew);
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
-        genesis.nTime = 1518002819;
+        genesis.nTime = 1521198687;
         genesis.nBits = 0x1e0fffff;
         genesis.nNonce = 1247314;
 
         hashGenesisBlock = genesis.GetHash();
-
         assert(hashGenesisBlock == uint256("0x000008968a12126c31fe23129f16500295de19a9d066f7e92fa1bf0d68977291"));
         assert(genesis.hashMerkleRoot == uint256("0x36075ec728fe09335e6d1025eac7a187161375e2ef47e50e4cae86995a1efcc1"));
 
-        vSeeds.push_back(CDNSSeedData("fornix seed 1", "185.243.112.70"));
-        vSeeds.push_back(CDNSSeedData("fornix seed 2", "23.228.232.76"));
-        vSeeds.push_back(CDNSSeedData("fornix seed 3", "185.243.112.254"));
+        vFixedSeeds.clear();
+        vSeeds.clear();
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 35);
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 95);
-        base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 163);
-        base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x02)(0x2D)(0x25)(0x33).convert_to_container<std::vector<unsigned char> >();
-        base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x02)(0x21)(0x31)(0x2B).convert_to_container<std::vector<unsigned char> >();
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 33);
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 91);
+        base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 173);
+        base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x02)(0x24)(0x33)(0x24).convert_to_container<std::vector<unsigned char> >();
+        base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x02)(0x21)(0x25)(0x32).convert_to_container<std::vector<unsigned char> >();
         // 	BIP44 coin type is from https://github.com/satoshilabs/slips/blob/master/slip-0044.md
-        base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x80)(0x00)(0x00)(0x77).convert_to_container<std::vector<unsigned char> >();
+        base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x90)(0x32)(0x00)(0x83).convert_to_container<std::vector<unsigned char> >();
 
         convertSeed6(vFixedSeeds, pnSeed6_main, ARRAYLEN(pnSeed6_main));
 
@@ -180,11 +177,11 @@ public:
     {
         networkID = CBaseChainParams::TESTNET;
         strNetworkID = "test";
-        pchMessageStart[0] = 0x45;
-        pchMessageStart[1] = 0x76;
-        pchMessageStart[2] = 0x65;
-        pchMessageStart[3] = 0xba;
-        vAlertPubKey = ParseHex("042ea461817021fa1a8c9dd00a81718108827960936852f28f1531a6b27218ae70519a6009aaf5da1c493ea657585253a2fec70280aed695c0c217cf43f2134c1c");
+        pchMessageStart[0] = 0x23;
+        pchMessageStart[1] = 0x3e;
+        pchMessageStart[2] = 0xa8;
+        pchMessageStart[3] = 0xc5;
+        vAlertPubKey = ParseHex("049a711e19c2df1524524a47c7822e1fb806cf2de5d9fd77897d445aebf6087a6c4edc6818c5e3630100858b6f928cc3008ddb8ece09582b226a08fdbe88ab05e3");
         nDefaultPort = 24248;
         nEnforceBlockUpgradeMajority = 51;
         nRejectBlockOutdatedMajority = 75;
@@ -199,7 +196,7 @@ public:
         nMaxMoneyOut = 43199500 * COIN;
 
         //! Modify the testnet genesis block so the timestamp is valid for a later start.
-        genesis.nTime = 1454124731;
+        genesis.nTime = 1521198748;
         genesis.nNonce = 2402015;
 
         hashGenesisBlock = genesis.GetHash();
@@ -207,15 +204,15 @@ public:
         vFixedSeeds.clear();
         vSeeds.clear();
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 139); // Testnet fornix addresses start with 'x' or 'y'
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 19);  // Testnet fornix script addresses start with '8' or '9'
-        base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 239);     // Testnet private keys start with '9' or 'c' (Bitcoin defaults)
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 135); // Testnet fornix addresses start with 'x' or 'y'
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 25);  // Testnet fornix script addresses start with '8' or '9'
+        base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 172);     // Testnet private keys start with '9' or 'c' (Bitcoin defaults)
         // Testnet fornix BIP32 pubkeys start with 'DRKV'
-        base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x3a)(0x80)(0x61)(0xa0).convert_to_container<std::vector<unsigned char> >();
+        base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x5a)(0x80)(0x35)(0xa0).convert_to_container<std::vector<unsigned char> >();
         // Testnet fornix BIP32 prvkeys start with 'DRKP'
-        base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x3a)(0x80)(0x58)(0x37).convert_to_container<std::vector<unsigned char> >();
+        base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x5a)(0x80)(0x58)(0x25).convert_to_container<std::vector<unsigned char> >();
         // Testnet fornix BIP44 coin type is '1' (All coin's testnet default)
-        base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x80)(0x00)(0x00)(0x01).convert_to_container<std::vector<unsigned char> >();
+        base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x35)(0x00)(0x00)(0x01).convert_to_container<std::vector<unsigned char> >();
 
 
         fRequireRPCPassword = true;
@@ -249,10 +246,10 @@ public:
         networkID = CBaseChainParams::REGTEST;
         strNetworkID = "regtest";
         strNetworkID = "regtest";
-        pchMessageStart[0] = 0xa1;
-        pchMessageStart[1] = 0xcf;
-        pchMessageStart[2] = 0x7e;
-        pchMessageStart[3] = 0xac;
+        pchMessageStart[0] = 0xd3;
+        pchMessageStart[1] = 0xac;
+        pchMessageStart[2] = 0xf5;
+        pchMessageStart[3] = 0xb8;
         nSubsidyHalvingInterval = 150;
         nEnforceBlockUpgradeMajority = 750;
         nRejectBlockOutdatedMajority = 950;
@@ -261,7 +258,7 @@ public:
         nTargetTimespan = 24 * 60 * 60; // Fornix: 1 day
         nTargetSpacing = 1 * 60;        // Fornix: 1 minutes
         bnProofOfWorkLimit = ~uint256(0) >> 1;
-        genesis.nTime = 1454124731;
+        genesis.nTime = 1521196823;
         genesis.nBits = 0x207fffff;
         genesis.nNonce = 12345;
 
